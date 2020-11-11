@@ -1,0 +1,43 @@
+<section id="signIn">
+  <div class="container pt-5">
+    <form (ngSubmit)='signIn.valid && signInValue()' [formGroup]='signIn' class="w-50 m-auto">
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <input [class.is-valid]="signIn.get('email').status == 'VALID'" formControlName="email" type="email"
+            class="form-control" placeholder="Enter Your Email">
+          <div *ngIf="signIn.get('email').touched && signIn.get('email').errors "
+            class="alert alert-danger p-2 text-capitalize text-center">invalid email</div><!-- emailAlert -->
+        </div><!-- /Email form-group -->
+      </div><!-- /emailCol -->
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <input [class.is-valid]="signIn.get('password').status == 'VALID' " formControlName="password"
+            autocomplete="on" type="password" class="form-control" placeholder="Enter Your Password">
+          <div *ngIf="signIn.get('password').touched && signIn.get('password').errors "
+            class="alert alert-danger p-2 text-capitalize text-center">invalid password</div><!-- passwordAlert -->
+        </div><!-- /Password form-group -->
+      </div><!-- /passwordCol -->
+
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-info w-100 m-0">Sign In</button> <!-- submitButton -->
+
+        <div *ngIf="isSuccess" class="alert alert-success text-center text-capitalize mt-3 font-weight-bold"
+          role="alert">
+
+          {{dataMessage}}....
+
+        </div>
+
+        <div *ngIf="isError" class="alert alert-danger text-center text-capitalize mt-3 font-weight-bold" role="alert">
+
+          {{dataMessage}}
+
+        </div>
+
+      </div><!-- /submitCol -->
+
+    </form>
+  </div><!-- /container -->
+</section>

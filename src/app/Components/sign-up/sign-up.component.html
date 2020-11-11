@@ -1,0 +1,76 @@
+<section id="signUp">
+  <div class="container pt-5">
+
+    <form [formGroup]="signUp" (ngSubmit)='signUp.valid && signUpValue()' class="w-50 m-auto">
+      <div class="row my-3">
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <input [class.is-valid]="signUp.get('first_name').status == 'VALID'" formControlName="first_name"
+              type="text" class="form-control" placeholder="Enter First Name">
+            <div *ngIf="signUp.get('first_name').touched && signUp.get('first_name').errors"
+              class="alert alert-danger text-center text-capitalize p-2">invalid name</div><!-- fNameAlert -->
+          </div><!-- /fName form-group -->
+        </div><!-- fNameCol -->
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <input [class.is-valid]="signUp.get('last_name').status == 'VALID'" formControlName="last_name" type="text"
+              class="form-control" placeholder="Enter Last Name">
+            <div *ngIf="signUp.get('last_name').touched && signUp.get('last_name').errors "
+              class="alert alert-danger p-2 text-capitalize text-center">invalid name</div>
+          </div><!-- /lName form-group -->
+        </div><!-- /lNameCol -->
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <input [class.is-valid]="signUp.get('email').status == 'VALID'" [class.is-invalid] = 'errorMessageAlert'
+              formControlName="email" type="email"
+              class="form-control" placeholder="Enter Your Email">
+            <div *ngIf="signUp.get('email').touched && signUp.get('email').errors "
+              class="alert alert-danger p-2 text-capitalize text-center">invalid email</div><!-- emailAlert -->
+          </div><!-- /Email form-group -->
+        </div><!-- /emailCol -->
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <input [class.is-valid]="signUp.get('age').status == 'VALID' " formControlName="age" type="number"
+              class="form-control" placeholder="Enter Your Age">
+            <div *ngIf="signUp.get('age').touched && signUp.get('age').errors "
+              class="alert alert-danger p-2 text-capitalize text-center">invalid age</div><!-- ageAlert -->
+          </div><!-- /Age form-group -->
+        </div><!-- /ageCol -->
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <input [class.is-valid]="signUp.get('password').status == 'VALID' " formControlName="password"
+              autocomplete="on" type="password" class="form-control" placeholder="Enter Your Password">
+            <div *ngIf="signUp.get('password').touched && signUp.get('password').errors "
+              class="alert alert-danger p-2 text-capitalize text-center">invalid password</div><!-- passwordAlert -->
+          </div><!-- /Password form-group -->
+        </div><!-- /passwordCol -->
+
+        <div class="col-md-12">
+          <button [disabled]='signUp.invalid' [ngStyle]="signUp.invalid? isSignUpValid : isSignUpInvalid" type="submit"
+            class="btn btn-info w-100 m-0"><span *ngIf="!isClicked">Sign Up</span> <span
+              *ngIf="isClicked">Waiting...</span>
+          </button> <!-- submitButton -->
+
+          <div *ngIf="succsessMessageAlert" class="alert alert-success text-center text-capitalize mt-3 font-weight-bold" role="alert">
+            
+            {{dataSuccessMessage}}
+
+          </div>
+
+          <div *ngIf="errorMessageAlert" class="alert alert-danger text-center text-capitalize mt-3 font-weight-bold" role="alert">
+
+            {{dataErrorMessage}}
+
+          </div>
+
+        </div><!-- /submitCol -->
+
+      </div><!-- /row -->
+    </form>
+  </div><!-- /container -->
+</section>
