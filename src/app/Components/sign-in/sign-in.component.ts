@@ -24,7 +24,7 @@ export class SignInComponent implements OnInit {
 
   signInValue() {
 
-    if (this.signIn.valid) {
+    if (this.signIn.valid ) {
 
       this._AuthService.signIn(this.signIn.value).subscribe(data => {
 

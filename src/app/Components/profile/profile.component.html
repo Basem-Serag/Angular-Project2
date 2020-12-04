@@ -1,29 +1,40 @@
 <section class="pt-5" id="profile">
   <div class="container pt-5">
-    <div class="row">
+
+    <div *ngIf="!isLoad" class="row">
+      <div class="col-md-12">
+        <i class="fas fa-circle-notch spin fa-spin fa-2x text-center text-warning d-block"></i>
+      </div><!-- /loader-col -->
+    </div><!-- /loader-row -->
+
+
+    <div *ngIf="isLoad" class="row">
 
       <div class="col-md-12 d-flex justify-content-end align-items-center">
         <button class="btn btn-info d-block" data-toggle="modal" data-target="#addNote">Add Note</button>
       </div><!-- addNote col -->
 
-      <div class="col-md-3">
+      <div class="col-md-3" *ngFor="let note of allNotes">
         <div class="noteBox text-secondary text-center p-3 my-3 rounded shadow-sm">
 
           <div class="row">
             <div class="col-md-12">
-              <i class="fas fa-ellipsis-v text-white float-right" id="noteDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+              <i class="fas fa-ellipsis-v text-white float-right" id="noteDropdown" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"></i>
               <div class="dropdown">
                 <div class="dropdown-menu" aria-labelledby="noteDropdown">
-                  <a class="dropdown-item text-info d-flex justify-content-between align-items-center" href="#" data-toggle="modal" data-target="#editNote">Edit <i class="fas fa-pen-square"></i></a>
-                  <a class="dropdown-item text-danger d-flex justify-content-between align-items-center" href="#" data-toggle="modal" data-target="#deleteNote">Delete <i class="fas fa-trash"></i></a>
+                  <a class="dropdown-item text-info d-flex justify-content-between align-items-center" href="#"
+                    data-toggle="modal" data-target="#editNote">Edit <i class="fas fa-pen-square"></i></a>
+                  <a class="dropdown-item text-danger d-flex justify-content-between align-items-center" href="#"
+                    data-toggle="modal" data-target="#deleteNote">Delete <i class="fas fa-trash"></i></a>
                 </div><!-- dropdown-menu -->
               </div><!-- dropdown -->
 
             </div><!-- collapse col -->
           </div><!-- collaps row -->
 
-          <h3>My Note</h3>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit, hic?</p>
+          <h2>{{note.title}}</h2>
+          <p>{{note.desc}}</p>
         </div><!-- noteBox -->
       </div><!-- Note col -->
 
@@ -38,36 +49,40 @@
 <!-- Modal -->
 <div class="modal fade" id="addNote" tabindex="-1" aria-labelledby="addNote" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <form [formGroup]='addNote' (ngSubmit)='addData()'>
+      <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="addNote">Add Note</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div><!-- modal-header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNote">Add Note</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div><!-- modal-header -->
 
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Title">
-            </div><!-- col-title -->
+        <div class="modal-body">
 
-            <div class="col-md-12">
-              <textarea cols="30" rows="10" class="form-control my-3" placeholder="Type Your Note"></textarea>
-            </div><!-- col-Description -->
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <input formControlName='title' type="text" class="form-control" placeholder="Title">
+              </div><!-- col-title -->
 
-          </div><!-- row -->
-        </div><!-- container -->
-      </div><!-- modal-body -->
+              <div class="col-md-12">
+                <textarea formControlName='desc' cols="30" rows="10" class="form-control my-3"
+                  placeholder="Type Your Note"></textarea>
+              </div><!-- col-Description -->
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Add</button>
-        <button type="button" class="btn btn-danger">Cancel</button>
-      </div><!-- modal-footer -->
+            </div><!-- row -->
+          </div><!-- container -->
+        </div><!-- modal-body -->
 
-    </div><!-- modal-content -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info">Add</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        </div><!-- modal-footer -->
+
+      </div><!-- modal-content -->
+    </form>
   </div><!-- modal-dialog -->
 </div><!-- Modal -->
 
@@ -132,7 +147,7 @@
       </div><!-- modal-header -->
 
       <div class="modal-body">
-          <p class="lead text-center font-weight-bold">Do you really want to delete ? <br> poocess cannot be undone</p>
+        <p class="lead text-center font-weight-bold">Do you really want to delete ? <br> poocess cannot be undone</p>
       </div><!-- modal-body -->
 
       <div class="modal-footer">

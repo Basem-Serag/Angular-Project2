@@ -10,8 +10,17 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 export class SignUpComponent implements OnInit {
 
+  // users:any['']
   constructor(private _AuthService: AuthService, private _Router: Router) {
+    // this.users = [this.signUp.controls.value];
+    // localStorage.setItem('USERS' , this.users)
+    // console.log(this.users);
 
+    // let user =  localStorage.getItem('user')
+    // console.log(user);
+    
+    
+    
   }
 
   signUp = new FormGroup({
@@ -21,6 +30,9 @@ export class SignUpComponent implements OnInit {
     age: new FormControl('', [Validators.required, Validators.pattern(/[1-9]{1}[0-9]/)]),
     password: new FormControl('', [Validators.required, Validators.pattern(/([0-9a-z].*[A-Z])|([A-Z].*[a-z])/)])
   })
+  
+  
+   user : any[]
 
   isSignUpValid = { 'background-color': 'gray', 'border': 'gray' };
   isSignUpInvalid = { 'background-color': '#138496', 'border': '138496' };
@@ -31,37 +43,41 @@ export class SignUpComponent implements OnInit {
   errorMessageAlert = false
 
   signUpValue() {
+    // this.user = this.signUp.value
 
-    this.isClicked = true
+    // console.log(this.user);
+    
+
+  //   this.isClicked = true
 
 
-    if (this.signUp.valid) {
+  //   if (this.signUp.valid) {
 
 
-      this._AuthService.signUp(this.signUp.value).subscribe(data => {
-        if (data.message == 'success') {
+  //     this._AuthService.signUp(this.signUp.value).subscribe(data => {
+  //       if (data.message == 'success') {
 
-          this.signUp.reset()
-          this.isClicked = false
-          this.succsessMessageAlert = true
-          this.errorMessageAlert = false
-          setTimeout( ()=> this._Router.navigate(['/signin']) , 1500);
-          this.dataSuccessMessage = data.message
+  //         this.signUp.reset()
+  //         this.isClicked = false
+  //         this.succsessMessageAlert = true
+  //         this.errorMessageAlert = false
+  //         setTimeout( ()=> this._Router.navigate(['/signin']) , 1500);
+  //         this.dataSuccessMessage = data.message
           
-        }
-        else {
-          this.dataErrorMessage = data.errors.email.message
-          this.succsessMessageAlert = false
-          this.errorMessageAlert = true
-          this.isClicked = false
+  //       }
+  //       else {
+  //         this.dataErrorMessage = data.errors.email.message
+  //         this.succsessMessageAlert = false
+  //         this.errorMessageAlert = true
+  //         this.isClicked = false
 
-        }
-        console.log(data);
+  //       }
+  //       console.log(data);
 
 
-      })
+  //     })
 
-    }
+  //   }
 
   }
 

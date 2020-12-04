@@ -14,4 +14,8 @@ export class NotesService {
   getAllNotes(data):Observable<any>{
     return  this._HttpClient.post(this.baseUrl + 'getUserNotes' , data)
   }
+
+  addNote(data):Observable<any>{
+    return this._HttpClient.post(this.baseUrl + 'addNote' , data)
+  }
 }
